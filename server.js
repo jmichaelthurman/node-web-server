@@ -71,13 +71,26 @@ app.get('/about',(req,res) => {
     });
 });
 
+app.get('/projects',(req,res) => {
+    res.render('projects.hbs',{
+        
+        pageTitle: 'Projects'
+    });
+});
+
 app.get('/bad',(req,res) => {
     res.render('bad.hbs',{
         
         pageTitle: 'Bad Request',
         errorMessage: 'Bad news, Charlie. No chocolate for you.'
     });
-});
+}); 
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}.`)
+    var now = new Date().toString();
+    fs.appendFile('server.log',now + ',' + ' Server is listening on port: ' + port + '\n', (err) =>{
+        if(err){
+            console.log('Ooops! Something went wrong.');
+        };
+    })
 });
